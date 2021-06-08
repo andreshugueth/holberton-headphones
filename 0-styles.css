@@ -36,7 +36,6 @@ a {
 
 abbr[title] {
   border-bottom: none;
-  text-decoration: underline;
   text-decoration: underline dotted;
 }
 
@@ -97,24 +96,24 @@ select {
   text-transform: none;
 }
 
-[type="button"],
-[type="reset"],
-[type="submit"],
+[type=button],
+[type=reset],
+[type=submit],
 button {
   -webkit-appearance: button;
 }
 
-[type="button"]::-moz-focus-inner,
-[type="reset"]::-moz-focus-inner,
-[type="submit"]::-moz-focus-inner,
+[type=button]::-moz-focus-inner,
+[type=reset]::-moz-focus-inner,
+[type=submit]::-moz-focus-inner,
 button::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
 
-[type="button"]:-moz-focusring,
-[type="reset"]:-moz-focusring,
-[type="submit"]:-moz-focusring,
+[type=button]:-moz-focusring,
+[type=reset]:-moz-focusring,
+[type=submit]:-moz-focusring,
 button:-moz-focusring {
   outline: 1px dotted ButtonText;
 }
@@ -140,23 +139,23 @@ textarea {
   overflow: auto;
 }
 
-[type="checkbox"],
-[type="radio"] {
+[type=checkbox],
+[type=radio] {
   box-sizing: border-box;
   padding: 0;
 }
 
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
+[type=number]::-webkit-inner-spin-button,
+[type=number]::-webkit-outer-spin-button {
   height: auto;
 }
 
-[type="search"] {
+[type=search] {
   -webkit-appearance: textfield;
   outline-offset: -2px;
 }
 
-[type="search"]::-webkit-search-decoration {
+[type=search]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
@@ -181,195 +180,209 @@ template {
   display: none;
 }
 
+/* Fonts
+============================= */
+@font-face {
+  font-family: 'sans-pro';
+  src:  url('./fonts/SourceSansPro-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
 /* Variables
-  ============================= */
-.navbar {
+============================= */
+:root {
+  --font-family_primary: sans-pro;
+  --primary-color: white;
+  --secondary-color: #071629;
+  --button-primary-color: #ff6565;
+}
+
+/* Global Styles
+============================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100vw;
+  font-family: var(--font-family_primary);
+}
+
+/* Header
+============================= */
+.header {
+  display: flex;
+  justify-content: center;
+}
+.header__navbar {
   background: transparent;
   position: absolute;
-  top: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 100vw;
   z-index: 3;
 }
-
-.navbar__options {
-  text-align: center;
-  list-style: none;
-}
-
-.navbar__options li {
-  padding-top: 7px;
-  line-height: 1px;
-}
-
-.navbar__options li a {
-  color: transparent;
-}
-
-.navbar__input {
+.header__navbar_input {
   display: none;
 }
-
-.navbar__label_hamburger {
-  flex-basis: 20%;
-}
-
-.navbar__logo {
-  flex-basis: 80%;
-  max-width: 161px;
-}
-
-.navbar__options {
-  flex-basis: 100%;
-}
-
-.linea {
-  margin: 4px 4px;
-  display: block;
-  background: white;
-  user-select: none;
-  width: 15px;
-  height: 2.5px;
-  transition: transform 0.2s ease;
-}
-
-.linea1,
-.linea3 {
-  width: 20px;
-}
-
-.navbar__input:checked + .navbar__label_hamburger .linea1 {
+.header__navbar_input:checked + .hamburger-menu .linea_up--rotate-right {
   position: relative;
   top: 6.5px;
   transform: rotate(45deg);
   transition: transform 0.2s ease;
 }
-
-.navbar__input:checked + .navbar__label_hamburger .linea2 {
+.header__navbar_input:checked + .hamburger-menu .linea--hidden {
   background: transparent;
 }
-
-.navbar__input:checked + .navbar__label_hamburger .linea3 {
+.header__navbar_input:checked + .hamburger-menu .linea_down--rotate-left {
   position: relative;
   top: -6.5px;
   transform: rotate(-45deg);
   transition: transform 0.2s ease;
 }
-
-.navbar__input:checked ~ .navbar__options li {
+.header__navbar_input:checked ~ .options_links .list_item {
   padding-top: 40px;
   transition: all 0.3s ease;
 }
-
-.navbar__input:checked ~ .navbar__options li a {
+.header__navbar_input:checked ~ .options_links .list_item--link {
   color: white;
   text-decoration: none;
 }
+.header__navbar_label {
+  display: inline-block;
+  position: relative;
+  top: 34px;
+  left: 29px;
+}
+.header__navbar_label .hamburger_menu_linea {
+  margin: 4px 4px;
+  display: block;
+  background: var(--primary-color);
+  user-select: none;
+  width: 15px;
+  height: 2.5px;
+  transition: transform 0.2s ease;
+}
+.header__navbar_label .linea_up--rotate-left, .header__navbar_label .linea_down--rotate-right {
+  width: 20px;
+}
+.header__navbar_options {
+  text-align: center;
+  list-style: none;
+}
+.header__navbar_options li {
+  padding-top: 7px;
+  line-height: 1px;
+}
+.header__navbar_options li a {
+  color: transparent;
+}
+.header__navbar_logo {
+  display: block;
+  width: 100vw;
+  text-align: center;
+}
+.header__navbar_logo_imagen {
+  max-width: 161px;
+}
 
+/* Hero Section
+============================= */
 .hero {
   width: 100%;
+  text-align: center;
 }
-
-.hero .hero-body .hero__imagen {
-  width: 100%;
-  height: 100vh;
-  object-fit: cover;
-  object-position: 35%;
-  transform: scale(1);
+.hero__body {
+  max-height: 900px;
+  padding: 0;
 }
-
-.hero .hero-info {
-  position: absolute;
-  top: 300px;
+.hero__body_image {
+  display: block;
+  width: 100vw;
+  height: 869px;
+  background-image: url("./images/headphones_hero_1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 30%;
+}
+.hero__body_info {
+  max-width: 1440px;
+  position: relative;
+  top: -500px;
   display: flex;
   flex-direction: column;
   text-align: center;
-  padding: 20px;
-  color: white;
-  font-family: "Source Sans Pro", sans-serif;
+  padding-left: 8%;
+  padding-right: 8%;
+  color: var(--primary-color);
 }
-
-.hero .hero-info .hero-button {
-  margin: 0 auto;
-  margin-top: 30px;
-  margin-bottom: 60px;
+.hero__body_info .button {
+  margin: 30px auto 60px;
   padding: 15px 15px;
   width: 160px;
   border-radius: 30px;
-  background: #ff6565;
-  color: white;
+  background: var(--button-primary-color);
+  color: var(--primary-color);
   border: none;
 }
-
-.hero .hero-info .hero-button:hover {
+.hero__body_info .button:hover {
   opacity: 0.8;
 }
 
-.what_we_do {
-  padding: 25px;
-  text-align: center;
-}
 
-.what_we_do .we_do_body {
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.what_we_do .we_do_body .card {
-  flex-basis: 300px;
-  padding-top: 60px;
-  padding-bottom: 60px;
-  line-height: 30px;
-}
-
-.our_result {
-  width: 100%;
-  height: 100vh;
-}
-
+/* Tablet view Styles
+============================= */
 @media screen and (min-width: 767px) {
-  .navbar {
-    background: transparent;
-    position: absolute;
-    top: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    z-index: 3;
+  .header__navbar {
+      top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100vw;
+      padding: 0 9% 0 9%;
+      box-sizing: border-box;
+
   }
-  .navbar__options {
-    text-align: center;
-    list-style: none;
+  .header__navbar_input, .header__navbar_label {
+      display: none;
   }
-  .navbar__input {
-    display: none;
+  .header__navbar_logo {
+      flex-basis: 50%;
+      text-align: left;
   }
-  .navbar__label_hamburger {
-    display: none;
+  .header__navbar_logo_imagen {
+      max-width: 161px;
   }
-  .navbar__logo {
-    flex-basis: 50%;
-    max-width: 161px;
+  .header__navbar_options {
+      flex-basis: 50%;
+      display: flex;
+      justify-content: space-evenly;
   }
-  .navbar__options {
-    flex-basis: 50%;
-    display: flex;
-    justify-content: center;
+  .header__navbar_options .list_item .list_item--link {
+      color: var(--primary-color);
+      text-decoration: none;
   }
-  .navbar__options li a {
-    color: white;
-    text-decoration: none;
-    padding-left: 10px;
+  .header__navbar_options .list_item .list_item--link:hover {
+      color: #ff6565;
   }
-  .navbar__options li a:hover {
-    color: #ff6565;
+
+  .hero__body_info {
+      padding-left: 10%;
+      padding-right: 10%;
+  }
+}
+/* Desktop view Styles
+============================= */
+@media screen and (min-width: 1440px) {
+  .header__navbar {
+      max-width: 1440px;
+  }
+
+  .hero__body_info {
+      margin: 0 auto;
+      padding-left: 400px;
+      padding-right: 400px;
   }
 }
